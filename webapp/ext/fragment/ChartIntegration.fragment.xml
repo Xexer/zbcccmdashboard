@@ -5,6 +5,8 @@
 		vizProperties="{
 			title: {visible: false},
 			legendGroup: {layout: {position: 'top'}},
+			interaction: {behaviorType: null},
+			tooltip: {visible: true},
 			plotArea: {
 				colorPalette: ['#188918', '#6aa220', '#f0a000', '#f4690c'],
 				dataLabel: {visible: true},
