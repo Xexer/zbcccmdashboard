@@ -1,3 +1,35 @@
-<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:macros="sap.fe.macros">
-	<macros:Chart id="idOverViewChart" metaPath="/Scores/@com.sap.vocabularies.UI.v1.Chart#idTimeChart" />
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:viz="sap.viz.ui5.controls" xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+	<!-- Relative binding: only the scores of the provider shown on the object page -->
+	<viz:VizFrame id="idOverViewChart" width="100%" height="25rem" uiConfig="{applicationSet: 'fiori'}" vizType="stacked_column"
+		vizProperties="{
+			title: {visible: false},
+			legendGroup: {layout: {position: 'top'}},
+			plotArea: {
+				colorPalette: ['#188918', '#6aa220', '#f0a000', '#f4690c'],
+				dataLabel: {visible: true}
+			},
+			categoryAxis: {title: {visible: false}},
+			valueAxis: {title: {visible: false}}
+		}">
+		<viz:dataset>
+			<viz.data:FlattenedDataset id="idOverViewChartDataset"
+				data="{path: '_OtherScores', sorter: {path: 'RunTime'}, templateShareable: false}">
+				<viz.data:dimensions>
+					<viz.data:DimensionDefinition identity="RunTime" name="{i18n>chartRunTime}" value="{RunTime}" />
+				</viz.data:dimensions>
+				<viz.data:measures>
+					<viz.data:MeasureDefinition identity="LevelA" name="{i18n>levelA}" value="{LevelAObjects}" />
+					<viz.data:MeasureDefinition identity="LevelB" name="{i18n>levelB}" value="{LevelBObjects}" />
+					<viz.data:MeasureDefinition identity="LevelC" name="{i18n>levelC}" value="{LevelCObjects}" />
+					<viz.data:MeasureDefinition identity="LevelD" name="{i18n>levelD}" value="{LevelDObjects}" />
+				</viz.data:measures>
+			</viz.data:FlattenedDataset>
+		</viz:dataset>
+		<viz:feeds>
+			<viz.feeds:FeedItem id="idOverViewChartFeedValues" uid="valueAxis" type="Measure"
+				values="LevelA,LevelB,LevelC,LevelD" />
+			<viz.feeds:FeedItem id="idOverViewChartFeedCategory" uid="categoryAxis" type="Dimension" values="RunTime" />
+		</viz:feeds>
+	</viz:VizFrame>
 </core:FragmentDefinition>
