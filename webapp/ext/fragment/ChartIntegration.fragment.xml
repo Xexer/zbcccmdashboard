@@ -7,7 +7,9 @@
 			legendGroup: {layout: {position: 'top'}},
 			plotArea: {
 				colorPalette: ['#188918', '#6aa220', '#f0a000', '#f4690c'],
-				dataLabel: {visible: true}
+				dataLabel: {visible: true},
+				isFixedDataPointSize: true,
+				dataPointSize: {min: 65, max: 100}
 			},
 			categoryAxis: {title: {visible: false}},
 			valueAxis: {title: {visible: false}}
@@ -16,7 +18,7 @@
 			<viz.data:FlattenedDataset id="idOverViewChartDataset"
 				data="{path: '_OtherScores', sorter: {path: 'RunTime'}, templateShareable: false}">
 				<viz.data:dimensions>
-					<viz.data:DimensionDefinition identity="RunTime" name="{i18n>chartRunTime}" value="{RunTime}" />
+					<viz.data:DimensionDefinition identity="RunPeriod" name="{i18n>chartRunPeriod}" value="{RunPeriod}" />
 				</viz.data:dimensions>
 				<viz.data:measures>
 					<viz.data:MeasureDefinition identity="LevelA" name="{i18n>levelA}" value="{LevelAObjects}" />
@@ -29,7 +31,7 @@
 		<viz:feeds>
 			<viz.feeds:FeedItem id="idOverViewChartFeedValues" uid="valueAxis" type="Measure"
 				values="LevelA,LevelB,LevelC,LevelD" />
-			<viz.feeds:FeedItem id="idOverViewChartFeedCategory" uid="categoryAxis" type="Dimension" values="RunTime" />
+			<viz.feeds:FeedItem id="idOverViewChartFeedCategory" uid="categoryAxis" type="Dimension" values="RunPeriod" />
 		</viz:feeds>
 	</viz:VizFrame>
 </core:FragmentDefinition>
